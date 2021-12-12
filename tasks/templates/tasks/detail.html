@@ -1,0 +1,24 @@
+<h3>Task Detail</h3>
+
+<div>
+    <form>
+        {% csrf_token %}
+        <div>
+            {% if task.completed == False %}
+                <div>
+                    {{ task.title }}
+                    <small>(Not Completed)</small>
+                    <button type="submit"><a href="{% url 'task_update' task.id %}">Update</a></button>
+                </div>
+            {% else %}
+                <div>
+                    {{ task.title }}
+                    <small>(Completed!)</small>
+                    <button type="submit"><a href="{% url 'task_update' task.id %}">Update</a></button>
+                </div>
+            {% endif %}
+            <small>{{ task.date|date:"M d, Y" }}</small>
+        </div>
+    </form>
+    <button><a href="{% url 'task_delete' task.id %}">Delete</a></button>
+</div>

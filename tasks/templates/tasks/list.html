@@ -1,0 +1,24 @@
+<h3>To Do List</h3>
+
+<form method='POST'>
+    {% csrf_token %}
+    <div>
+        {{ form.title }}
+        <button type="submit">add</button>
+    </div>
+    
+</form>
+
+{% for task in tasks %}
+    {% if task.completed == False %}
+        <div>
+            <a href="{% url 'task_detail' task.id %}">{{ task.title }}</a> 
+            <button type="submit"><a href="{% url 'task_delete' task.id %}">Delete</a></button>
+        </div>
+    {% else %}
+        <div>
+            <strike><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></strike>
+            <button type="submit"><a href="{% url 'task_delete' task.id %}">Delete</a></button>
+        </div>
+    {% endif %}
+{% endfor %}
